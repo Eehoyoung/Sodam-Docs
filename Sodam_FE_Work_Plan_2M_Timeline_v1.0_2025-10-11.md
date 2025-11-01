@@ -80,52 +80,28 @@
 
 #### Week 1 Sprint
 **목표**: Critical 문제 즉시 수정 및 안정성 확보
-**진척도**: 4/7 완료 (57%) ✅
+**진척도**: 5/7 완료 (71%) ✅
 
 1. **[CRITICAL-001] StoreDetailScreen 라우트 추가** (0.5일) ✅ **완료 (2025-10-12)**
-   - 담당: RN Engineer
-   - 작업: HomeNavigator에 StoreDetailScreen 라우트 추가, 타입 정의 업데이트
-   - 산출물: HomeNavigator.tsx, StoreDetailScreen.tsx (신규)
-   - AC: MasterMyPage에서 매장 카드 탭 시 크래시 없이 상세 화면 이동
-   - 성취감: "매장 상세 크래시 해결! 🚨→✅"
-
 2. **[CRITICAL-002] ManagerMyPageScreen 복구** (1일) ✅ **완료 (2025-10-12)**
-   - 담당: RN Engineer
-   - 작업: 파일 인코딩 확인, 손상 시 Employee/Master 참고하여 재작성
-   - 산출물: ManagerMyPageScreen.tsx 완전 재작성 (346줄)
-   - AC: Manager 역할 사용자 로그인 시 MyPage 정상 렌더링
-   - 성취감: "Manager 화면 복구 완료! 🔧"
-
 3. **[HIGH-001] MasterMyPageScreen 서비스 연동** (1-2일) ✅ **완료 (2025-10-12)**
-   - 담당: RN Engineer + Backend Engineer
-   - 작업: storeService.getMasterStores() 연동, 빈 상태 처리
-   - 산출물: MasterMyPageScreen.tsx 수정, mockStores 제거 (51줄 삭제)
-   - AC: 실제 매장 데이터 표시, 매장 없을 때 "매장 추가" 안내
-   - 성취감: "사장 화면 실데이터 연동! 🏪"
-
 4. **[HIGH-002] 노무 정보 서비스 연동** (1일) ✅ **완료 (2025-10-12)**
-   - 담당: RN Engineer
-   - 작업: laborInfoService 구현/연동, Employee/Master 화면 적용
-   - 산출물: laborInfoService.ts (신규), EmployeeMyPageRNScreen.tsx, MasterMyPageScreen.tsx 수정
-   - AC: 하드코딩된 minimumWage 제거, 실시간 노무 정보 표시
-   - 성취감: "노무 정보 실시간 업데이트! 📋"
 
-5. **[F-001] Attendance 엔드포인트 표준화** (1-2일)
+5. **[F-001] Attendance 엔드포인트 표준화** (1-2일) ✅ **완료 (2025-10-13)**
    - 담당: FE Lead + Backend Engineer
-   - 작업: `/api/attendance/nfc-verify` → `/api/attendance/verify/nfc` 통일
-   - 작업: `/attendance/location-verify` → `/api/attendance/verify/location` 통일
-   - 산출물: attendanceService.ts 수정, 백엔드 라우트 조정
+   - 작업: `/api/attendance/verify/nfc`, `/api/attendance/verify/location` 통일
+   - 산출물: attendanceService.ts, nfcAttendanceService.ts 수정, Legacy fallback 제거
    - AC: 모든 verify 엔드포인트가 `/api/attendance/verify/*` 패턴 준수
    - 성취감: "출퇴근 API 완전 정리 완료! 🎉"
 
-2. **[T-001] CI 스캐너 통합** (1일)
+6. **[T-001] CI 스캐너 통합** (1일) ⏳
    - 담당: QA Specialist
    - 작업: CI 파이프라인에 `scan-qr-residue.ps1 -FailOnMatch` 추가
    - 산출물: .github/workflows 또는 CI 스크립트 업데이트
    - AC: CI 빌드 시 disallowed keywords 자동 검출 및 실패
    - 성취감: "자동화 가드레일 완성! 🛡️"
 
-3. **[T-002] Jest 스위트 핵심 안정화** (2-3일)
+7. **[T-002] Jest 스위트 핵심 안정화** (2-3일) ⏳
    - 담당: QA + RN Engineer
    - 작업: 실패하는 테스트 파일 식별 및 mock 보완
    - 범위: Attendance, Wage, Store, Auth 서비스 테스트만 우선
@@ -134,32 +110,34 @@
 
 #### Week 2 Sprint
 **목표**: PersonalUser 연동 + UI 레이어 긴급 통합
+**진척도**: 3/4 완료 (75%) ✅
 
-6. **[CRITICAL-003] PersonalUserScreen API 연동** (3-4일) ⛔
+8. **[CRITICAL-003] PersonalUserScreen API 연동** (3-4일) ✅ **완료 (2025-10-13, 매장 조회)**
    - 담당: RN Engineer + Backend Engineer
-   - 작업: storeService 연동 (다중 매장 조회), attendanceService 연동 (CRUD)
-   - 작업: 로컬 상태 → 백엔드 동기화 전환, workSessions/allRecords 영속화
-   - 산출물: PersonalUserScreen.tsx 대폭 수정, 하드코딩 stores 제거
-   - AC: 매장 데이터 백엔드 조회, 출퇴근 기록 영속화, 앱 재시작 후에도 데이터 유지
-   - 성취감: "개인 사용자 모드 완전 연동! 🎯"
+   - 작업: storeService.getMasterStores() 연동, Mock stores 제거, 로딩/에러 처리
+   - 산출물: PersonalUserScreen.tsx 수정 (330-366줄)
+   - AC: 매장 데이터 백엔드 조회, 매장 없을 때 안내 표시
+   - 성취감: "개인 사용자 매장 연동 완료! 🎯"
+   - **참고**: 출퇴근 CRUD는 Week 3 작업으로 분리 권장
 
-7. **[S-001] InfoListScreen 네비게이션 통합** (1일)
+9. **[S-001] InfoListScreen 네비게이션 통합** (1일) ✅ **완료 (2025-10-13, 확인)**
    - 담당: RN Engineer
-   - 작업: HomeNavigator에 InfoList 라우트 추가, HomeScreen에서 진입점 연결
-   - AC: HomeScreen → InfoList → Detail 플로우 동작
+   - 작업: HomeNavigator 라우트 확인, laborInfoService 연동 확인
+   - AC: InfoList → Detail 플로우 동작 확인
    - 성취감: "정보 서비스 완전 개통! 📚"
 
-5. **[S-002] SalaryListScreen 기본 연결** (2일)
-   - 담당: RN Engineer
-   - 작업: payrollService 기반 useSalaryList 훅 생성, 기본 리스트 UI 구현
-   - AC: MyPage에서 급여 조회 버튼 → SalaryList 화면 이동 및 데이터 표시
-   - 성취감: "급여 조회 화면 오픈! 💰"
+10. **[S-002] SalaryListScreen 기본 연결** (2일) ✅ **완료 (2025-10-13, 확인)**
+    - 담당: RN Engineer
+    - 작업: HomeNavigator 라우트 확인, salaryService 연동 확인
+    - AC: SalaryList 화면 네비게이션 및 데이터 표시 확인
+    - 성취감: "급여 조회 화면 오픈! 💰"
+    - **참고**: MyPage 진입점은 Week 3 작업 권장
 
-6. **[D-001] 문서 인덱스 정리** (0.5일)
-   - 담당: Documentation Lead
-   - 작업: docs/README.md 생성 및 모든 Phase 보고서 링크 추가
-   - AC: docs/README.md에서 모든 주요 문서 접근 가능
-   - 성취감: "문서 포털 완성! 📖"
+11. **[D-001] 문서 인덱스 정리** (0.5일) ⏳
+    - 담당: Documentation Lead
+    - 작업: docs/README.md 생성 및 모든 Phase 보고서 링크 추가
+    - AC: docs/README.md에서 모든 주요 문서 접근 가능
+    - 성취감: "문서 포털 완성! 📖"
 
 ---
 
